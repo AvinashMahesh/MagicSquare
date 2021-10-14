@@ -1,0 +1,101 @@
+public class MagicSquare {
+
+	private int [][] theSq ;
+	public MagicSquare (int [][] sqData)
+	{
+	theSq = sqData;
+	}
+	
+	public boolean isMagic() {
+		
+		for (int a = 0; a < theSq.length - 1; a++)
+		{
+		if (rowSum (a) != rowSum (a+1) )
+		{
+			return false;
+		}
+		
+		
+		if (colSum (a) != colSum (a+1) )
+				{
+			
+			return false;
+				}
+		if (diag1() != diag2() )
+			{
+			
+			return false;
+			}
+		
+		if (valuesCheck() != true)
+		{
+			return false;
+		}
+		
+		} 
+		return true;	
+		}
+	
+		
+	
+	public boolean isA4x4Durer() {
+		boolean durer = true; 
+		int a = rowSum(0);
+		if (isMagic() == true && theSq.length == 4 && theSq[0].length == 4)
+		{
+		if (ULSum() != a)
+			durer = false;
+		if (LLSum() != a)
+			durer = false;
+		if (URSum() != a)
+			durer = false;
+		if (LRSum() != a)
+			durer = false;
+		if (cornerSum() != a)
+			durer = false;
+		if (centerSum() != a)
+			durer = false; 
+		if (topBottomCenterCells() != a)
+			durer = false; 
+		if (leftRightCenterCells() != a)
+			durer = false; 
+		}
+		else 
+			return false; 
+		
+		return durer;
+	}
+	
+	private int cornerSum() {
+		int sum = 0;
+		sum = theSq[0][0] + theSq[3][0] + theSq[0][3] + theSq[3][3];
+		return sum;
+	}
+	
+	private int centerSum() {
+		int sum = 0;
+		sum = theSq[1][1] + theSq[1][2] + theSq[2][1] + theSq[2][2];
+		return sum; 
+	}
+	
+	private int colSum (int c) {
+		int coltotal = 0; 
+		
+		for (int row = 0; row < theSq.length; row ++)
+		{
+			coltotal = coltotal + theSq [row][c];
+		}
+		return coltotal;
+		
+	}
+	
+	private int rowSum(int r) {
+		int rowtotal = 0; 
+		
+		for (int column = 0; column < theSq[0].length; column ++)
+		{
+			rowtotal = rowtotal + theSq[r][column];
+		}
+	return rowtotal;
+		
+	}
